@@ -1,7 +1,7 @@
+vault_password
 .terraform
-secret.*
 *.auto.tfvars
-*.tfstate
-*.tfstate.*
 *.backup
-vault-password
+key.*
+*.tfstate
+*.lock.hcl

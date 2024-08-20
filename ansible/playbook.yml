@@ -1,0 +1,52 @@
+---
+- name: Setup
+  hosts: all
+  tags: setup
+  roles:
+    - { role: geerlingguy.docker, become: yes }
+  tasks:
+    - name: Ignore PEP 668 because it's silly.
+      ansible.builtin.file:
+        path: /usr/lib/python3.12/EXTERNALLY-MANAGED
+        state: absent
+      become: true
+
+    - name: Install pip
+      apt:
+        name: python3-pip
+        update_cache: yes
+        cache_valid_time: 604800
+      become: true
+
+    - name: Install docker python lib
+      pip:
+        name: docker
+
+
+- hosts: all
+  become: yes
+  tags: deploy
+  
+  tasks:
+    - name: Запустить Redmine в контейнере
+      community.docker.docker_container:
+        image: redmine:{{ app_tag }}
+        platform: linux/amd64
+        name: redmine
+        state: started
+        restart: true
+        ports:
+          - "{{ app_port }}:3000"
+        env:
+          REDMINE_DB_POSTGRES: "{{ redmine_db_postgres }}"
+          REDMINE_DB_USERNAME: "{{ redmine_db_username }}"
+          REDMINE_DB_PASSWORD: "{{ redmine_db_password }}"
+          REDMINE_DB_PORT: "{{ redmine_db_port }}"
+          REDMINE_DB_DATABASE: "{{ redmine_db_database }}"
+      become: true
+       
+
+- hosts: webservers
+  roles:
+    - { role: datadog.datadog, become: yes }
+  tags: datadog
