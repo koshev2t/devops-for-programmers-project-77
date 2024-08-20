@@ -3,12 +3,13 @@
 
 ### Команды
 
+Инициализация terraform: `make init`
 
+Создание структуры terraform: `make apply`
 
+Удаление структуры terraform: `make destroy`
 
-
-
-Настройка окружения: `make setup`
+Установка ролей: `make install`
 
 Развертывание приложения: `make deploy`
 
