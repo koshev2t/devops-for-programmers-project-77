@@ -1,5 +1,5 @@
 ### Hexlet tests and linter status:
-[![Actions Status](https://github.com/kochev2t/devops-for-programmers-project-77/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/kochev2t/devops-for-programmers-project-77/actions)
+[![Actions Status](https://github.com/koshev2t/devops-for-programmers-project-77/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/koshev2t/devops-for-programmers-project-77/actions)
 
 ### Команды
 
